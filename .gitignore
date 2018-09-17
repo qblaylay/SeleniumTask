@@ -1,0 +1,19 @@
+# ------------ #
+# --- GIT ---- #
+# ------------ #
+# ------------- #
+# --- Maven --- #
+# ------------- #
+target/
+pom.xml.*
+
+# --------------- #
+# --- Eclipse --- #
+# --------------- #
+.metadata
+.project
+.classpath
+.settings
+.metadata
+.factorypath
+test-output/
