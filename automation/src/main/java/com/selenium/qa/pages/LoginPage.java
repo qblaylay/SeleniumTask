@@ -27,7 +27,7 @@ public class LoginPage {
 
 	public boolean checkSuccessLogin() {
 
-		return signInText.getText().equals("Hello, test");
+		return signInText.getText().equals("Hello, TEST");
 	}
 
 	public void setEmail(String name) {

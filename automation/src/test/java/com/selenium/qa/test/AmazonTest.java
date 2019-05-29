@@ -20,64 +20,67 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 
 public class AmazonTest {
 
-	private WebDriver driver;
+    private WebDriver driver;
 
-	@Test
-	public void testSearchAndWishList() {
+    @Test
+    public void testSearchAndWishList() {
 
-		// Check the Amazon Page is displayed
-		assertTrue(this.driver.getTitle().contains("Amazon.com"));
+        // Check the Amazon Page is displayed
+        assertTrue(this.driver.getTitle().contains("Amazon.com"));
 
-		LoginPage loginPage = new LoginPage(driver);
-		SearchPage searchPage = new SearchPage(driver);
-		ItemPage itemPage = new ItemPage(driver);
-		WishListPage wishListPage = new WishListPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        SearchPage searchPage = new SearchPage(driver);
+        ItemPage itemPage = new ItemPage(driver);
+        WishListPage wishListPage = new WishListPage(driver);
 
-		// Enter the credentials
-		loginPage.clickSignInNavBar();
-		loginPage.setEmail("testautomationqa1234@gmail.com");
-		loginPage.clickContinueButton();
-		loginPage.setPassword("123456987");
-		loginPage.clickSignInButton();
-		
-		// Check the Login Successful
-		assertTrue(loginPage.checkSuccessLogin());
-		
-		// Search Page
-		searchPage.setSearchKeyword("samsung");
-		searchPage.clickSearchButton();
-		assertTrue(searchPage.checkResults("\"samsung\""));
-		searchPage.goToSecondPage();
-		assertTrue(searchPage.checkSecondPageResults());
-		String selectedItem = searchPage.selectThirdItem();
-		
-		// Item is sent to the List
-		itemPage.clickAddToListButton();
-		itemPage.clickContinueShoppingButton();
-		itemPage.clickWishListButton();
-		assertTrue(wishListPage.checkWishListHeader());
-		assertTrue(wishListPage.checkItemOnWishList(selectedItem));
-		
-		// Delete the item from the List
-		wishListPage.deleteItemOnWishList();
-		assertFalse(wishListPage.checkItemOnWishList(selectedItem));
+        // Enter the credentials
+        loginPage.clickSignInNavBar();
+        loginPage.setEmail("testautomationemailer@gmail.com");
 
-	}
+        // Deprecated Step
+        // loginPage.clickContinueButton();
 
-	@BeforeMethod
-	public void beforeMethod() {
-		ChromeDriverManager.getInstance().setup();
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
-		driver.get("http://www.amazon.com");
-	}
+        loginPage.setPassword("123456987");
+        loginPage.clickSignInButton();
 
-	@AfterMethod
+        // Check the Login Successful
+        assertTrue(loginPage.checkSuccessLogin());
 
-	public void afterMethod() {
+        // Search Page
+        searchPage.setSearchKeyword("samsung");
+        searchPage.clickSearchButton();
+        assertTrue(searchPage.checkResults("\"samsung\""));
+        searchPage.goToSecondPage();
+        assertTrue(searchPage.checkSecondPageResults());
+        String selectedItem = searchPage.selectThirdItem();
 
-		driver.quit();
+        // Item is sent to the List
+        itemPage.clickAddToListButton();
+        itemPage.clickContinueShoppingButton();
+        itemPage.clickWishListButton();
+        assertTrue(wishListPage.checkWishListHeader());
+        assertTrue(wishListPage.checkItemOnWishList(selectedItem));
 
-	}
+        // Delete the item from the List
+        wishListPage.deleteItemOnWishList();
+        assertFalse(wishListPage.checkItemOnWishList(selectedItem));
+
+    }
+
+    @BeforeMethod
+    public void beforeMethod() {
+        ChromeDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        driver.get("http://www.amazon.com");
+    }
+
+    @AfterMethod
+
+    public void afterMethod() {
+
+        driver.quit();
+
+    }
 }

@@ -10,63 +10,61 @@ import org.openqa.selenium.support.PageFactory;
 
 public class SearchPage {
 
-	@FindBy(id = "twotabsearchtextbox")
-	static WebElement searchBar;
-	@FindBy(xpath = "/html/body/div[1]/header/div/div[1]/div[3]/div/form/div[2]/div/input")
-	static WebElement searchButton;
-	@FindBy(css = "span.a-color-state.a-text-bold")
-	static WebElement searchResult;
-	@FindBy(css = "#pagn > span:nth-of-type(3) > a")
-	static WebElement secondPageButton;
-	@FindBy(id = "s-result-count")
-	static WebElement resultCount;
-	@FindBy(id = "atfResults")
-	static List<WebElement> searchResultList;
-	@FindBy(xpath = ".//*[starts-with(@id, 'result_')]")
-	static List<WebElement> selectThirdItem;
+    @FindBy(id = "twotabsearchtextbox")
+    static WebElement searchBar;
+    @FindBy(className = "nav-input")
+    static WebElement searchButton;
+    @FindBy(css = "span.a-color-state.a-text-bold")
+    static WebElement searchResult;
+    @FindBy(css = "ul.a-pagination > li:nth-of-type(3) > a")
+    static WebElement secondPageButton;
+    @FindBy(css = "div.sg-col.s-breadcrumb > div.sg-col-inner > div.a-section > span:nth-of-type(1)")
+    static WebElement resultCount;
+    @FindBy(id = "atfResults")
+    static List<WebElement> searchResultList;
+    @FindBy(xpath = ".//*[starts-with(@data-cel-widget, 'search_result_')]")
+    static List<WebElement> selectThirdItem;
 
-	public SearchPage(WebDriver wd) {
+    public SearchPage(WebDriver wd) {
 
-		PageFactory.initElements(wd, this);
-	}
+        PageFactory.initElements(wd, this);
+    }
 
-	public boolean checkResults(String expectedInput) {
+    public boolean checkResults(String expectedInput) {
 
-		return searchResult.getText().equals(expectedInput);
-	}
+        return searchResult.getText().equals(expectedInput);
+    }
 
-	public boolean checkSecondPageResults() {
+    public boolean checkSecondPageResults() {
 
-		return resultCount.getText().contains("17-32");
-	}
+        return resultCount.getText().contains("17-32");
+    }
 
-	public void setSearchKeyword(String keyword) {
+    public void setSearchKeyword(String keyword) {
 
-		searchBar.sendKeys(keyword);
+        searchBar.sendKeys(keyword);
 
-	}
+    }
 
-	public void clickSearchButton() {
+    public void clickSearchButton() {
 
-		searchButton.click();
+        searchButton.click();
 
-	}
+    }
 
-	public void goToSecondPage() {
+    public void goToSecondPage() {
 
-		secondPageButton.click();
+        secondPageButton.click();
 
-	}
+    }
 
-	public String selectThirdItem() {
+    public String selectThirdItem() {
 
-		String storedThirdItemText = selectThirdItem.get(2)
-				.findElement(By.cssSelector(".a-size-medium.s-inline.s-access-title.a-text-normal")).getText();
+        String storedThirdItemText = selectThirdItem.get(3)
+                .findElement(By.cssSelector("span.a-size-medium.a-color-base.a-text-normal")).getText();
+        selectThirdItem.get(3).findElement(By.cssSelector("span.a-size-medium.a-color-base.a-text-normal"))
+                .click();
 
-		selectThirdItem.get(2).findElement(By.cssSelector(".a-size-medium.s-inline.s-access-title.a-text-normal"))
-				.click();
-
-		return storedThirdItemText;
-	}
-
+        return storedThirdItemText;
+    }
 }
