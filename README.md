@@ -7,6 +7,7 @@ AMAZON.com Website Automation Test script
 - check that user signs in
 
 3- Search "Samsung" on the search page
+
 4- Go to the Second Page
 - check that you are in the second page
 
