@@ -1,6 +1,5 @@
-# Automation Task on AMAZON
+# Automation
 AMAZON.com Website Automation Test script
--- QA Assignment --
 ### Test Case Description
 1- Go to https:www.amazon.com/
 2- Log in with your credentials;
